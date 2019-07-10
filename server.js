@@ -8,11 +8,12 @@ const bodyParser = require('body-parser')
 const cookieSession = require('cookie-session')
 const level = require('level')
 const ms = require('ms')
+const yid = require('yid')
 
 // setup
 const githubAppSecret = process.env.GITHUB_APP_SECRET
 const sessionKey = process.env.SESSION_KEY
-const db = level('.data/store.db')
+const db = level('.data/store.db', { valueEncoding: 'json' })
 
 function checkGitHubSignature(req, res, next) {
   console.log('body:', req.body)
@@ -48,7 +49,37 @@ app.get('/', (req, res) => {
 })
 
 app.get('/setup', (req, res) => {
+  // https://github-webhook-inspector.glitch.me/setup?installation_id=1255053&setup_action=install
+  const id = yid()
+  db.put(`installation:${yid}`, {
+    installation_id: req.query.installation_id,
+    setup_action: req.query.setup_action,
+  })
   res.render('setup')
+})
+
+app.get('/installations', (req, res) => {
+  const installations = []
+  const opts = {
+    // gt: 'installation:',
+    // lt: 'installation::',
+  }
+  db.createReadStream(opts)
+    .on('data', function (data) {
+      console.log(data.key, '=', data.value)
+      installations.push(data)
+    })
+    .on('error', function (err) {
+      console.log('Oh my!', err)
+    })
+    .on('close', function () {
+      console.log('Stream closed')
+    })
+    .on('end', function () {
+      console.log('Stream ended')
+      res.render('installations', { installations })
+    })
+  ;
 })
 
 app.post('/webhook/github', checkGitHubSignature, (req, res) => {
