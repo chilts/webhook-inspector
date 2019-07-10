@@ -4,14 +4,17 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible" content="ie=edge")
-    title GitHub WebHook Inspector
     meta(name="author" content="name")
-    meta(name="description" content="Receive, store, and inspect your GitHub WebHoks.")
-    meta(name="keywords" content="keywords,here")
+    meta(name="description" content="Receive, store, and inspect your GitHub WebHooks.")
+    meta(name="keywords" content="GitHub WebHook, WebHook, WebHooks, GitHub, Git")
+
+    title GitHub WebHook Inspector
+
     link(href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet")
-    // Replace with your tailwind.css once created
+
   body.bg-gray-100.font-sans.leading-normal.tracking-normal
-    nav#header.fixed.w-full.z-10.top-0
+
+    nav#header.fixed.w-full.z-10.top-0.bg-white.shadow
       #progress.h-1.z-20.top-0(style="background:linear-gradient(to right, #4dc0b5 var(--scroll), transparent 0);")
       .w-full.mx-auto.flex.flex-wrap.items-center.justify-between.mt-0.py-3(class="md:max-w-4xl")
         .pl-4
@@ -32,54 +35,23 @@ html(lang="en")
               a.inline-block.text-gray-600.no-underline.py-2.px-4(class="hover:text-gray-900 hover:text-underline" href="#") link
 
 
+    // Container
     .container.w-full.mx-auto.pt-20(class="md:max-w-3xl")
-      .w-full.px-4.text-xl.text-gray-800.leading-normal(class="md:px-6" style="font-family:Georgia,serif;")
-        // Title
-        .font-sans
-          span.text-base.text-teal-500.font-bold(class="md:text-sm")
-            | <
-            span
-              a.text-base.text-teal-500.font-bold.no-underline(href="#" class="md:text-sm hover:underline") BACK TO BLOG
-              p
-              h1.font-bold.font-sans.break-normal.text-gray-900.pt-6.pb-2.text-3xl(class="md:text-4xl") Welcome to Minimal Blog
-              p.text-sm.font-normal.text-gray-600(class="md:text-base") Published 19 February 2019
+
+      .w-full.px-4.text-xl.text-gray-800.leading-normal(class="md:px-6")
+
+        h1.font-bold.font-sans.break-normal.text-gray-900.pt-6.pb-2.text-3xl(class="md:text-4xl") Welcome to Minimal Blog
+
+        p.text-sm.font-normal.text-gray-600(class="md:text-base") Published 19 February 2019
 
         p.py-6
-          | 👋 Welcome fellow 
-          a.text-teal-500.no-underline(class="hover:underline" href="https://www.tailwindcss.com") Tailwind CSS
-          |  and miminal monochrome blog fan.  This starter template provides a starting point to create your own minimal monochrome blog using Tailwind CSS and vanilla Javascript.
+          | Welcome to GitHub WebHook Inspector.
         p.py-6
-          | The basic blog page layout is available and all using the default Tailwind CSS classes (although there are a few hardcoded style tags). If you are going to use this in your project, you will want to convert the classes into components.
-        h1.py-2.font-sans Heading 1
-        h2.py-2.font-sans Heading 2
-        h3.py-2.font-sans Heading 3
-        h4.py-2.font-sans Heading 4
-        h5.py-2.font-sans Heading 5
-        h6.py-2.font-sans Heading 6
-        p.py-6
-          | Sed dignissim lectus ut tincidunt vulputate. Fusce tincidunt lacus purus, in mattis tortor sollicitudin pretium. Phasellus at diam posuere, scelerisque nisl sit amet, tincidunt urna. Cras nisi diam, pulvinar ut molestie eget, eleifend ac magna. Sed at lorem condimentum, dignissim lorem eu, blandit massa. Phasellus eleifend turpis vel erat bibendum scelerisque. Maecenas id risus dictum, rhoncus odio vitae, maximus purus. Etiam efficitur dolor in dolor molestie ornare. Aenean pulvinar diam nec neque tincidunt, vitae molestie quam fermentum. Donec ac pretium diam. Suspendisse sed odio risus. Nunc nec luctus nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis nec nulla eget sem dictum elementum.
-        ol
-          li.py-3
-            | Maecenas accumsan lacus sit amet elementum porta. Aliquam eu libero lectus. Fusce vehicula dictum mi. In non dolor at sem ullamcorper venenatis ut sed dui. Ut ut est quam. Suspendisse quam quam, commodo sit amet placerat in, interdum a ipsum. Morbi sit amet tellus scelerisque tortor semper posuere.
-          li.py-3
-            | Morbi varius posuere blandit. Praesent gravida bibendum neque eget commodo. Duis auctor ornare mauris, eu accumsan odio viverra in. Proin sagittis maximus pharetra. Nullam lorem mauris, faucibus ut odio tempus, ultrices aliquet ex. Nam id quam eget ipsum luctus hendrerit. Ut eros magna, eleifend ac ornare vulputate, pretium nec felis.
-          li.py-3
-            | Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc vitae pretium elit. Cras leo mauris, tristique in risus ac, tristique rutrum velit. Mauris accumsan tempor felis vitae gravida. Cras egestas convallis malesuada. Etiam ac ante id tortor vulputate pretium. Maecenas vel sapien suscipit, elementum odio et, consequat tellus.
-        blockquote.border-l-4.border-teal-500.italic.my-8.pl-8(class="md:pl-12")
-          | Example of blockquote - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula.
-        p.py-6 Example code block:
-        pre.bg-gray-900.rounded.text-white.font-mono.text-base.p-2(class="md:p-4").
-          \n\t\t\t\t          
-          \t\t\t          
-        // / Post Content
-      // Tags
-      .text-base.text-gray-500.px-4.py-6(class="md:text-sm")
-        | Tags: 
-        a.text-base.text-teal-500.no-underline(href="#" class="md:text-sm hover:underline") Link
-        |  . 
-        a.text-base.text-teal-500.no-underline(href="#" class="md:text-sm hover:underline") Link
+          | And now what do we do?
+
       // Divider
       hr.border-b-2.border-gray-400.mb-8.mx-4
+
       // Subscribe
       .container.px-4
         .font-sans.bg-white.rounded-lg.shadow-md.p-4.text-center
@@ -90,34 +62,7 @@ html(lang="en")
               .max-w-xl.mx-auto.p-1.pr-0.flex.flex-wrap.items-center
                 input.flex-1.mt-4.appearance-none.border.border-gray-400.rounded.shadow-md.p-3.text-gray-600.mr-2(type="email" placeholder="youremail@example.com" class="focus:outline-none")
                 button.flex-1.mt-4.block.appearance-none.bg-teal-500.text-white.text-base.font-semibold.tracking-wider.uppercase.py-4.rounded.shadow(type="submit" class="md:inline-block hover:bg-teal-400") Subscribe
-      // /Subscribe
-      // Author
-      .flex.w-full.items-center.font-sans.px-4.py-12
-        img.w-10.h-10.rounded-full.mr-4(src="http://i.pravatar.cc/300" alt="Avatar of Author")
-        .flex-1.px-2
-          p.text-base.font-bold.text-base.leading-none.mb-2(class="md:text-xl") Jo Bloggerson
-          p.text-gray-600.text-xs(class="md:text-base")
-            | Minimal Blog Tailwind CSS template by 
-            a.text-teal-500.no-underline(class="hover:underline" href="https://www.tailwindtoolbox.com") TailwindToolbox.com
-        .justify-end
-          button.bg-transparent.border.border-gray-500.text-xs.text-gray-500.font-bold.py-2.px-4.rounded-full(class="hover:border-teal-500 hover:text-teal-500") Read More
-      // /Author
-      // Divider
-      hr.border-b-2.border-gray-400.mb-8.mx-4
-      // Next & Prev Links
-      .font-sans.flex.justify-between.content-center.px-4.pb-12
-        .text-left
-          span.text-xs.font-normal.text-gray-600(class="md:text-sm") < Previous Post
-          br
-          p
-            a.break-normal.text-base.text-teal-500.font-bold.no-underline(href="#" class="md:text-sm hover:underline") Blog title
-        .text-right
-          span.text-xs.font-normal.text-gray-600(class="md:text-sm") Next Post >
-          br
-          p
-            a.break-normal.text-base.text-teal-500.font-bold.no-underline(href="#" class="md:text-sm hover:underline") Blog title
-      // /Next & Prev Links
-    // /container
+
     footer.bg-white.border-t.border-gray-400.shadow
       .container.max-w-4xl.mx-auto.flex.py-8
         .w-full.mx-auto.flex.flex-wrap
@@ -136,38 +81,8 @@ html(lang="en")
                   a.inline-block.text-gray-600.no-underline.py-1(class="hover:text-gray-900 hover:text-underline" href="#") Add social link
                 li
                   a.inline-block.text-gray-600.no-underline.py-1(class="hover:text-gray-900 hover:text-underline" href="#") Add social link
-    script.
-      /* Progress bar */
-      //Source: https://alligator.io/js/progress-bar-javascript-css-variables/
-      var h = document.documentElement,
-      b = document.body,
-      st = 'scrollTop',
-      sh = 'scrollHeight',
-      progress = document.querySelector('#progress'),
-      scroll;
-      var scrollpos = window.scrollY;
-      var header = document.getElementById("header");
-      var navcontent = document.getElementById("nav-content");
-      document.addEventListener('scroll', function() {
 
-      /*Refresh scroll % width*/
-      scroll = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
-      progress.style.setProperty('--scroll', scroll + '%');
-      /*Apply classes for slide in bar*/
-      scrollpos = window.scrollY;
-      if(scrollpos > 10){
-      header.classList.add("bg-white");
-      header.classList.add("shadow");
-      navcontent.classList.remove("bg-gray-100");
-      navcontent.classList.add("bg-white");
-      }
-      else {
-      header.classList.remove("bg-white");
-      header.classList.remove("shadow");
-      navcontent.classList.remove("bg-white");
-      navcontent.classList.add("bg-gray-100");
-      }
-      });
+    script.
       //Javascript to toggle the menu
       document.getElementById('nav-toggle').onclick = function(){
       document.getElementById("nav-content").classList.toggle("hidden");
