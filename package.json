@@ -13,5 +13,5 @@
   "engines": {
     "node": "10.x"
   },
-  "license": "UNLICENSED"
+  "license": "MIT"
 }

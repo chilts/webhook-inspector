@@ -6,7 +6,7 @@ const express = require('express')
 const level = require('level')
 
 // setuo
-const db = level('data/store.db')
+const db = level('.data/store.db')
 
 // app
 const app = express()
@@ -20,6 +20,10 @@ app.use(express.static('public'))
 
 app.get('/', (req, res) => {
   res.render('index')
+})
+
+app.get('/webhook/github', (req, res) => {
+  res.send('OK')
 })
 
 // server
