@@ -4,6 +4,7 @@ const crypto = require('crypto')
 
 // npm
 const express = require('express')
+const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cookieSession = require('cookie-session')
 const level = require('level')
@@ -36,6 +37,7 @@ app.set('views', 'views')
 app.set('view engine', 'pug')
 app.enable('trust proxy')
 
+app.use(morgan('dev'))
 app.use(express.static('public'))
 app.use(bodyParser.raw())
 app.use(cookieSession({
@@ -68,7 +70,7 @@ app.get('/installations', (req, res) => {
   }
   db.createReadStream(opts)
     .on('data', function (data) {
-      console.log(data.key, '=', data.value)
+      // console.log(data.key, '=', data.value)
       installations.push(data)
     })
     .on('error', function (err) {
@@ -76,10 +78,10 @@ app.get('/installations', (req, res) => {
     })
     .on('close', function () {
       console.log('Stream closed')
+      res.render('installations', { installations })
     })
     .on('end', function () {
       console.log('Stream ended')
-      res.render('installations', { installations })
     })
   ;
 })

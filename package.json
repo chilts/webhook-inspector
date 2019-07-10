@@ -12,7 +12,8 @@
     "yid": "^1.1.0",
     "body-parser": "^1.19.0",
     "cookie-session": "^1.3.3",
-    "ms": "^2.1.2"
+    "ms": "^2.1.2",
+    "morgan": "^1.9.1"
   },
   "engines": {
     "node": "10.x"
