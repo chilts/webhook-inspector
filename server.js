@@ -14,7 +14,8 @@ app.get('/', function(req, res) {
 })
 
 // listen for requests :)
-const server = http
+const server = http.createServer()
+s
 
 const listener = app.listen(process.env.PORT, function() {
   console.log('Your app is listening on port ' + listener.address().port);
