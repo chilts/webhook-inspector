@@ -3,11 +3,12 @@
   "version": "0.2.0",
   "description": "App to receive, display, and query GitHub WebHooks.",
   "scripts": {
-    "start": "node server.js"    
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.16.4",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "level": "^5.0.1"
   },
   "engines": {
     "node": "10.x"

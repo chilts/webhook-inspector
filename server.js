@@ -1,22 +1,32 @@
+// core
 const http = require('http')
 
+// npm
 const express = require('express')
+const level = require('level')
 
+// setuo
+const db = level('data/store.db')
+
+// app
 const app = express()
-app.set('view-engine', 'pug')
+app.set('case sensitive routing', true)
+app.set('strict routing', true)
+app.set('views', 'views')
+app.set('view engine', 'pug')
+app.enable('trust proxy')
 
+app.use(express.static('public'))
 
-app.use(express.static('public'));
-
-// http://expressjs.com/en/starter/basic-routing.html
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
   res.render('index')
 })
 
-// listen for requests :)
+// server
 const server = http.createServer()
-s
+server.on('request', app)
 
-const listener = app.listen(process.env.PORT, function() {
-  console.log('Your app is listening on port ' + listener.address().port);
-});
+const port = process.env.PORT || 3000
+server.listen(port, function() {
+  console.log('Listening on port ' + port)
+})
