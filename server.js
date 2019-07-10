@@ -7,6 +7,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cookieSession = require('cookie-session')
 const level = require('level')
+const ms = require('ms')
 
 // setup
 const githubAppSecret = process.env.GITHUB_APP_SECRET
@@ -38,7 +39,7 @@ app.use(bodyParser.raw())
 app.use(cookieSession({
   name   : 'session',
   keys   : [ sessionKey ],
-  maxAge : ,
+  maxAge : ms('1 month'),
 }))
 
 app.get('/', (req, res) => {
