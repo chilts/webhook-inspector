@@ -1,89 +1,27 @@
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    meta(http-equiv="X-UA-Compatible" content="ie=edge")
-    meta(name="author" content="name")
-    meta(name="description" content="Receive, store, and inspect your GitHub WebHooks.")
-    meta(name="keywords" content="GitHub WebHook, WebHook, WebHooks, GitHub, Git")
+extends layout
 
-    title GitHub WebHook Inspector
+block content
+  .w-full.px-4.text-xl.text-gray-800.leading-normal(class="md:px-6")
 
-    link(href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet")
+    h1.font-bold.font-sans.break-normal.text-gray-900.pt-6.pb-2.text-3xl(class="md:text-4xl") GitHub WebHook Inspector
 
-  body.bg-gray-100.font-sans.leading-normal.tracking-normal
+    p.text-sm.font-normal.text-gray-600(class="md:text-base") Published 19 February 2019
 
-    nav#header.fixed.w-full.z-10.top-0.bg-white.shadow
-      #progress.h-1.z-20.top-0(style="background:linear-gradient(to right, #4dc0b5 var(--scroll), transparent 0);")
-      .w-full.mx-auto.flex.flex-wrap.items-center.justify-between.mt-0.py-3(class="md:max-w-4xl")
-        .pl-4
-          a.text-gray-900.text-base.no-underline.font-extrabold.text-xl(class="hover:no-underline" href="#")
-            | GitHub WebHook Inspector
-        .block.pr-4(class="lg:hidden")
-          button#nav-toggle.flex.items-center.px-3.py-2.border.rounded.text-gray-500.border-gray-600.appearance-none(class="hover:text-gray-900 hover:border-teal-500 focus:outline-none")
-            svg.fill-current.h-3.w-3(viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg")
-              title Menu
-              path(d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z")
-        #nav-content.w-full.flex-grow.hidden.mt-2.bg-gray-100.z-20(class="lg:flex lg:items-center lg:w-auto lg:block lg:mt-0 md:bg-transparent")
-          ul.list-reset.justify-end.flex-1.items-center(class="lg:flex")
-            li.mr-3
-              a.inline-block.py-2.px-4.text-gray-900.font-bold.no-underline(href="#") Active
-            li.mr-3
-              a.inline-block.text-gray-600.no-underline.py-2.px-4(class="hover:text-gray-900 hover:text-underline" href="#") link
-            li.mr-3
-              a.inline-block.text-gray-600.no-underline.py-2.px-4(class="hover:text-gray-900 hover:text-underline" href="#") link
+    p.py-6
+      | Welcome to GitHub WebHook Inspector.
+    p.py-6
+      | And now what do we do?
 
+  // Divider
+  hr.border-b-2.border-gray-400.mb-8.mx-4
 
-    // Container
-    .container.w-full.mx-auto.pt-20(class="md:max-w-3xl")
-
-      .w-full.px-4.text-xl.text-gray-800.leading-normal(class="md:px-6")
-
-        h1.font-bold.font-sans.break-normal.text-gray-900.pt-6.pb-2.text-3xl(class="md:text-4xl") GitHub WebHook Inspector
-
-        p.text-sm.font-normal.text-gray-600(class="md:text-base") Published 19 February 2019
-
-        p.py-6
-          | Welcome to GitHub WebHook Inspector.
-        p.py-6
-          | And now what do we do?
-
-      // Divider
-      hr.border-b-2.border-gray-400.mb-8.mx-4
-
-      // Subscribe
-      .container.mb-8.px-4
-        .font-sans.bg-white.rounded-lg.shadow-md.p-4.text-center
-          h2.font-bold.break-normal.text-xl(class="md:text-3xl") Subscribe to my Newsletter
-          h3.font-bold.break-normal.font-normal.text-gray-600.text-sm(class="md:text-base") Get the latest posts delivered right to your inbox
-          .w-full.text-center.pt-4
-            form(action="#")
-              .max-w-xl.mx-auto.p-1.pr-0.flex.flex-wrap.items-center
-                input.flex-1.mt-4.appearance-none.border.border-gray-400.rounded.shadow-md.p-3.text-gray-600.mr-2(type="email" placeholder="youremail@example.com" class="focus:outline-none")
-                button.flex-1.mt-4.block.appearance-none.bg-teal-500.text-white.text-base.font-semibold.tracking-wider.uppercase.py-4.rounded.shadow(type="submit" class="md:inline-block hover:bg-teal-400") Subscribe
-
-    footer.bg-white.border-t.border-gray-400.shadow
-      .container.max-w-4xl.mx-auto.flex.py-8
-        .w-full.mx-auto.flex.flex-wrap
-          .flex.w-full(class="md:w-1/2")
-            .px-8
-              h3.font-bold.text-gray-900 About
-              p.py-4.text-gray-600.text-sm
-                | A simple GitHub WebHook Inspector so you can see exactly what is happening when in your GitHub repos. Test only. Do not use this for production purposes.
-          .flex.w-full(class="md:w-1/2")
-            .px-8
-              h3.font-bold.text-gray-900 Social
-              ul.list-reset.items-center.text-sm.pt-3
-                li
-                  a.inline-block.text-gray-600.no-underline.py-1(class="hover:text-gray-900 hover:text-underline" href="#") Add social link
-                li
-                  a.inline-block.text-gray-600.no-underline.py-1(class="hover:text-gray-900 hover:text-underline" href="#") Add social link
-                li
-                  a.inline-block.text-gray-600.no-underline.py-1(class="hover:text-gray-900 hover:text-underline" href="#") Add social link
-
-    script.
-      //Javascript to toggle the menu
-      document.getElementById('nav-toggle').onclick = function(){
-      document.getElementById("nav-content").classList.toggle("hidden");
-      }
+  // Subscribe
+  .container.mb-8.px-4
+    .font-sans.bg-white.rounded-lg.shadow-md.p-4.text-center
+      h2.font-bold.break-normal.text-xl(class="md:text-3xl") Subscribe to my Newsletter
+      h3.font-bold.break-normal.font-normal.text-gray-600.text-sm(class="md:text-base") Get the latest posts delivered right to your inbox
+      .w-full.text-center.pt-4
+        form(action="#")
+          .max-w-xl.mx-auto.p-1.pr-0.flex.flex-wrap.items-center
+            input.flex-1.mt-4.appearance-none.border.border-gray-400.rounded.shadow-md.p-3.text-gray-600.mr-2(type="email" placeholder="youremail@example.com" class="focus:outline-none")
+            button.flex-1.mt-4.block.appearance-none.bg-teal-500.text-white.text-base.font-semibold.tracking-wider.uppercase.py-4.rounded.shadow(type="submit" class="md:inline-block hover:bg-teal-400") Subscribe

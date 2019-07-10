@@ -15,6 +15,7 @@ const sessionKey = process.env.SESSION_KEY
 const db = level('.data/store.db')
 
 function checkGitHubSignature(req, res, next) {
+  console.log('body:', req.body)
   
   const hmac = crypto.createHmac('sha1', githubAppSecret)
 
@@ -46,10 +47,14 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
-app.get('/webhook/github', checkGitHubSignature, (req, res) => {
-  
-  
-  
+app.get('/setup', (req, res) => {
+  res.render('setup')
+})
+
+app.post('/webhook/github', checkGitHubSignature, (req, res) => {
+  console.log('body:', req.body)
+  const data = JSON.parse(req.body)
+  console.log('data:', data)
   res.send('OK')
 })
 
