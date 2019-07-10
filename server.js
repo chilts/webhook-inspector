@@ -62,7 +62,7 @@ app.get('/setup', (req, res) => {
   res.render('setup')
 })
 
-app.get('/installations', (req, res) => {
+app.get('/installations', (req, res, next) => {
   const installations = []
   const opts = {
     gt: 'installation:',
@@ -74,14 +74,15 @@ app.get('/installations', (req, res) => {
       installations.push(data)
     })
     .on('error', function (err) {
-      console.log('Oh my!', err)
-    })
-    .on('close', function () {
-      console.log('Stream closed')
-      res.render('installations', { installations })
+      console.warn('err:', err)
+      next(err)
     })
     .on('end', function () {
-      console.log('Stream ended')
+      // console.log('Stream ended')
+    })
+    .on('close', function () {
+      // console.log('Stream closed')
+      res.render('installations', { installations })
     })
   ;
 })
