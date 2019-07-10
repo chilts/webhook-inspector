@@ -1,12 +1,28 @@
 // core
 const http = require('http')
+const crypto = require('crypto')
 
 // npm
 const express = require('express')
 const level = require('level')
 
-// setuo
+// setup
+const githubAppSecret = process.env.GITHUB_APP_SECRET
 const db = level('.data/store.db')
+
+function checkGitHubSignature(req, res, next) {
+  
+  const hmac = crypto.createHmac('sha1', githubAppSecret)
+
+  hmac.update(req.body);
+  console.log(hmac.digest('hex'));
+// Prints:
+//   7fd04df92f636fd450bc841c9418e5825c17f33ad9c87c518115a45971f7f77e
+
+  
+  
+  next()
+}
 
 // app
 const app = express()
@@ -18,11 +34,16 @@ app.enable('trust proxy')
 
 app.use(express.static('public'))
 
+app.use(bodyParser.raw())
+
 app.get('/', (req, res) => {
   res.render('index')
 })
 
-app.get('/webhook/github', (req, res) => {
+app.get('/webhook/github', checkGitHubSignature, (req, res) => {
+  
+  
+  
   res.send('OK')
 })
 
