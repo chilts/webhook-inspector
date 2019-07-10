@@ -51,7 +51,9 @@ app.get('/', (req, res) => {
 app.get('/setup', (req, res) => {
   // https://github-webhook-inspector.glitch.me/setup?installation_id=1255053&setup_action=install
   const id = yid()
-  db.put(`installation:${yid}`, {
+  db.put(`installation:${id}`, {
+    id,
+    type: 'installation',
     installation_id: req.query.installation_id,
     setup_action: req.query.setup_action,
   })
@@ -61,8 +63,8 @@ app.get('/setup', (req, res) => {
 app.get('/installations', (req, res) => {
   const installations = []
   const opts = {
-    // gt: 'installation:',
-    // lt: 'installation::',
+    gt: 'installation:',
+    lt: 'installation::',
   }
   db.createReadStream(opts)
     .on('data', function (data) {

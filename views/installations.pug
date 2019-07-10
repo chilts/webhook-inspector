@@ -1,10 +1,13 @@
 extends layout
 
 block content
-  .w-full.px-4.text-xl.text-gray-800.leading-normal(class="md:px-6")
+  .w-full.px-4.text-gray-800.leading-normal(class="md:px-6")
 
     h1.font-bold.font-sans.break-normal.text-gray-900.pt-6.pb-2.text-3xl(class="md:text-4xl") Installations
 
     for installation in installations
-      h3 Install ID=#{installation.installation_id}
-      p Action = #{installation.action}
+      h3.text-lg.font-bold ID=#{installation.value.id}
+      p Install ID=#{installation.value.installation_id}
+      p Setup Action = #{installation.value.setup_action}
+      p Data:
+      pre.border.border-gray-600.p-6.mb-8= JSON.stringify(installation, null, ' ')
