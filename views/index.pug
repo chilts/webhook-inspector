@@ -16,7 +16,7 @@ html(lang="en")
       .w-full.mx-auto.flex.flex-wrap.items-center.justify-between.mt-0.py-3(class="md:max-w-4xl")
         .pl-4
           a.text-gray-900.text-base.no-underline.font-extrabold.text-xl(class="hover:no-underline" href="#")
-            | Minimal Blog
+            | GitHub WebHook Inspector
         .block.pr-4(class="lg:hidden")
           button#nav-toggle.flex.items-center.px-3.py-2.border.rounded.text-gray-500.border-gray-600.appearance-none(class="hover:text-gray-900 hover:border-teal-500 focus:outline-none")
             svg.fill-current.h-3.w-3(viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg")
@@ -30,7 +30,8 @@ html(lang="en")
               a.inline-block.text-gray-600.no-underline.py-2.px-4(class="hover:text-gray-900 hover:text-underline" href="#") link
             li.mr-3
               a.inline-block.text-gray-600.no-underline.py-2.px-4(class="hover:text-gray-900 hover:text-underline" href="#") link
-    // Container
+
+
     .container.w-full.mx-auto.pt-20(class="md:max-w-3xl")
       .w-full.px-4.text-xl.text-gray-800.leading-normal(class="md:px-6" style="font-family:Georgia,serif;")
         // Title
@@ -42,8 +43,7 @@ html(lang="en")
               p
               h1.font-bold.font-sans.break-normal.text-gray-900.pt-6.pb-2.text-3xl(class="md:text-4xl") Welcome to Minimal Blog
               p.text-sm.font-normal.text-gray-600(class="md:text-base") Published 19 February 2019
-        // Post Content
-        // Lead Para
+
         p.py-6
           | 👋 Welcome fellow 
           a.text-teal-500.no-underline(class="hover:underline" href="https://www.tailwindcss.com") Tailwind CSS
@@ -125,7 +125,7 @@ html(lang="en")
             .px-8
               h3.font-bold.text-gray-900 About
               p.py-4.text-gray-600.text-sm
-                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel mi ut felis tempus commodo nec id erat. Suspendisse consectetur dapibus velit ut lacinia.
+                | A simple GitHub WebHook Inspector so you can see exactly what is happening when in your GitHub repos. Test only. Do not use this for production purposes.
           .flex.w-full(class="md:w-1/2")
             .px-8
               h3.font-bold.text-gray-900 Social
@@ -149,6 +149,7 @@ html(lang="en")
       var header = document.getElementById("header");
       var navcontent = document.getElementById("nav-content");
       document.addEventListener('scroll', function() {
+
       /*Refresh scroll % width*/
       scroll = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
       progress.style.setProperty('--scroll', scroll + '%');

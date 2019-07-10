@@ -2,6 +2,7 @@ dependencies:
   express: 4.16.4
   level: 5.0.1
   pug: 2.0.4
+  yid: 1.1.0
 packages:
   /@types/babel-types/7.0.7:
     dev: false
@@ -526,6 +527,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-81ypHEk/e3PaDgdJUwTxezH4fuU=
+  /math-random/1.0.4:
+    dev: false
+    resolution:
+      integrity: sha512-rUxjysqif/BZQH2yhd5Aaq7vXMSx9NdEsQcyA07uEzIvxgI7zIr33gGsh+RU0/XjmQpCW7RsVof1vlkvQVCK5A==
   /media-typer/0.3.0:
     dev: false
     engines:
@@ -959,6 +964,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-9+572FfdfB0tOMDnTvvWgdFDH9E=
+  /yid/1.1.0:
+    dependencies:
+      math-random: 1.0.4
+    dev: false
+    resolution:
+      integrity: sha512-ZWBloywFdrZSEk+7fDGxduF+3FpXsz0pfCAimpZWKOty0LZUsZZXIvyB0otG/UcB9vSubJxDQjX0xFkuHugwcA==
 registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
@@ -966,3 +977,4 @@ specifiers:
   express: ^4.16.4
   level: ^5.0.1
   pug: ^2.0.3
+  yid: ^1.1.0
