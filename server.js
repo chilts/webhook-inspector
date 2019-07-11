@@ -34,6 +34,7 @@ function checkGitHubSignature(req, res, next) {
     next(new Error('No X-Github-Delivery found on request'))
     return
   }
+  res.local.id = id
 
   const event = req.headers[githubEventHeaderName]
   console.log('event:', event)
@@ -41,6 +42,7 @@ function checkGitHubSignature(req, res, next) {
     next(new Error('No X-Github-Event found on request'))
     return
   }
+  res.local.event = event
 
   const signature = req.headers[githubSignatureHeaderName]
   console.log('signature:', signature)
@@ -51,14 +53,21 @@ function checkGitHubSignature(req, res, next) {
 
   const hmac = crypto.createHmac('sha1', githubAppSecret)
   hmac.update(req.body)
-  const hex = hmac.digest('hex')
-  console.log("hmac(hex)=" + hex)
-  if ( hex !== signature ) {
+  const calculated = 'sha1=' + hmac.digest('hex')
+  // console.log("hmac(hex)=" + calculated)
+  if ( calculated !== signature ) {
     next(new Error("GitHub Signature does not match what we calculated"))  
     return
   }
-   
+  
+  // now set the body to be the data
+  req.body = JSON.parse(req.body)
+
   next()
+}
+
+function githubSignatureError(err, req, res, next) => {
+  res.status(403).send('Request body was not signed or verification failed')
 }
 
 // app
@@ -119,11 +128,15 @@ app.get('/installations', (req, res, next) => {
 })
 
 app.post('/webhook/github', bodyParserRaw, checkGitHubSignature, (req, res) => {
-  console.log('headers:', req.headers)
-  console.log('body:', req.body)
-  const data = JSON.parse(req.body)
-  console.log('data:', data)
-  res.send('OK')
+  const id = yid()
+  db.put(`webhook:${id}`, {
+    id,
+    githubId: res.locals.id,
+    githubEvent: res.locals.event,
+    data: req.body,
+  }, err => {
+    res.send('OK')
+  })
 })
 
 // server
