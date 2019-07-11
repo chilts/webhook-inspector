@@ -12,33 +12,43 @@ const ms = require('ms')
 const yid = require('yid')
 
 // setup
-const githubSignatureHeaderName = 'x-hub-signature'
-const githubEventHeaderName = 'x-github-event'
 const githubDeliveryHeaderName = 'x-github-delivery'
+const githubEventHeaderName = 'x-github-event'
+const githubSignatureHeaderName = 'x-hub-signature'
 const githubAppSecret = process.env.GITHUB_APP_SECRET
 const sessionKey = process.env.SESSION_KEY
 const db = level('.data/store.db', { valueEncoding: 'json' })
 
 // middleware
+function addRequestId(req, res, next) {
+  req._ = {
+    rid: req.headers['x-request-id'],
+  }
+  next()
+}
+
 const bodyParserRaw = bodyParser.raw({ type: 'application/json' })
 
 function checkGitHubSignature(req, res, next) {
+  console.log('headers:', req.headers)
   // console.log('typeof body:', typeof req.body)
   // console.log('body:', req.body.toString('utf8'))
   // console.log('body:', req.body)
 
   // check we have the required headers
   const id = req.headers[githubDeliveryHeaderName]
-  // console.log('id:', id)
+  console.log('id:', id)
   if (!id) {
+    console.warn('No X-Github-Delivery found on request')
     next(new Error('No X-Github-Delivery found on request'))
     return
   }
   res.local.id = id
 
   const event = req.headers[githubEventHeaderName]
-  // console.log('event:', event)
+  console.log('event:', event)
   if (!event) {
+    console.warn('No X-Github-Event found on request')
     next(new Error('No X-Github-Event found on request'))
     return
   }
@@ -131,8 +141,10 @@ app.post('/webhook/github', bodyParserRaw, checkGitHubSignature, githubSignature
   const id = yid()
   db.put(`webhook:${id}`, {
     id,
-    githubId: res.locals.id,
-    githubEvent: res.locals.event,
+    github: {
+      id: res.locals.id,
+      event: res.locals.event,
+    },
     data: req.body,
   }, err => {
     res.send('OK')
