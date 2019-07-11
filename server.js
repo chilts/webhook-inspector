@@ -12,13 +12,21 @@ const ms = require('ms')
 const yid = require('yid')
 
 // setup
+const githubSignatureHeaderName = 'x-hub-signature'
+const githubEventHeaderName = 'x-github-event'
+const githubDeliveryHeaderName = 'x-github-delivery'
 const githubAppSecret = process.env.GITHUB_APP_SECRET
 const sessionKey = process.env.SESSION_KEY
 const db = level('.data/store.db', { valueEncoding: 'json' })
 
+// middleware
+const bodyParserRaw = bodyParser.raw({ type: '*/*' })
+
 function checkGitHubSignature(req, res, next) {
+  console.log('typeof body:', typeof req.body)
   console.log('body:', req.body)
-  
+  console.log('body:', req.body)
+
   const hmac = crypto.createHmac('sha1', githubAppSecret)
 
   hmac.update(req.body)
@@ -39,7 +47,6 @@ app.enable('trust proxy')
 
 app.use(morgan('dev'))
 app.use(express.static('public'))
-app.use(bodyParser.raw())
 app.use(cookieSession({
   name   : 'session',
   keys   : [ sessionKey ],
@@ -87,7 +94,8 @@ app.get('/installations', (req, res, next) => {
   ;
 })
 
-app.post('/webhook/github', checkGitHubSignature, (req, res) => {
+app.post('/webhook/github', bodyParserRaw, checkGitHubSignature, (req, res) => {
+  console.log('headers:', req.headers)
   console.log('body:', req.body)
   const data = JSON.parse(req.body)
   console.log('data:', data)
