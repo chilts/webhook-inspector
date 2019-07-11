@@ -57,8 +57,6 @@ function checkGitHubSignature(req, res, next) {
     next(new Error("GitHub Signature does not match what we calculated"))  
     return
   }
-  // Prints:
-  //   7fd04df92f636fd450bc841c9418e5825c17f33ad9c87c518115a45971f7f77e
    
   next()
 }
@@ -98,8 +96,8 @@ app.get('/setup', (req, res) => {
 app.get('/installations', (req, res, next) => {
   const installations = []
   const opts = {
-    gt: 'installation:',
-    lt: 'installation::',
+    //gt: 'installation:',
+    //lt: 'installation::',
   }
   db.createReadStream(opts)
     .on('data', function (data) {
