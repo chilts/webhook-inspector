@@ -20,20 +20,46 @@ const sessionKey = process.env.SESSION_KEY
 const db = level('.data/store.db', { valueEncoding: 'json' })
 
 // middleware
-const bodyParserRaw = bodyParser.raw({ type: '*/*' })
+const bodyParserRaw = bodyParser.raw({ type: 'application/json' })
 
 function checkGitHubSignature(req, res, next) {
   console.log('typeof body:', typeof req.body)
+  console.log('body:', req.body.toString('utf8'))
   console.log('body:', req.body)
-  console.log('body:', req.body)
+
+  // check we have the required headers
+  const id = req.headers[githubDeliveryHeaderName]
+  console.log('id:', id)
+  if (!id) {
+    next(new Error('No X-Github-Delivery found on request'))
+    return
+  }
+
+  const event = req.headers[githubEventHeaderName]
+  console.log('event:', event)
+  if (!event) {
+    next(new Error('No X-Github-Event found on request'))
+    return
+  }
+
+  const signature = req.headers[githubSignatureHeaderName]
+  console.log('signature:', signature)
+  if (!signature) {
+    next(new Error('No X-Hub-Signature found on request'))
+    return
+  }
 
   const hmac = crypto.createHmac('sha1', githubAppSecret)
-
   hmac.update(req.body)
-  console.log(hmac.digest('hex'))
+  const hex = hmac.digest('hex')
+  console.log("hmac(hex)=" + hex)
+  if ( hex !== signature ) {
+    next(new Error("GitHub Signature does not match what we calculated"))  
+    return
+  }
   // Prints:
   //   7fd04df92f636fd450bc841c9418e5825c17f33ad9c87c518115a45971f7f77e
-
+   
   next()
 }
 
