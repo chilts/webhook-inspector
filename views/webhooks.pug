@@ -19,5 +19,7 @@ block content
             ul.pl-6.list-disc
               for repo in webhook.value.data.repositories_added
                 li (#{repo.id}) #{repo.full_name}
+        if webhook.value.github.event === "push"
+          li Compare URL : #{webhook.value.data.compare}
 
-      pre.border.border-gray-600.p-6.mb-8= JSON.stringify(webhook.value.data, null, 2)
+      pre.border.border-gray-600.p-6.mb-8= JSON.stringify(webhook.value, null, 2)
