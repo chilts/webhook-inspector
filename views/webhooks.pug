@@ -3,7 +3,7 @@ extends layout
 block content
   .w-full.px-4.text-gray-800.leading-normal(class="md:px-6")
 
-    h1.font-bold.font-sans.break-normal.text-gray-900.pt-6.pb-2.text-3xl(class="md:text-4xl") Installations
+    h1.font-bold.font-sans.break-normal.text-gray-900.pt-6.pb-2.text-3xl(class="md:text-4xl") WebHooks
 
     for webhook in webhooks
       h3.font-bold Inspector ID = #{webhook.value.id}
@@ -11,4 +11,13 @@ block content
         li GitHub ID = #{webhook.value.github.id}
         li GitHub Event = #{webhook.value.github.event}
         li Action = #{webhook.value.data.action}
-      pre.border.border-gray-600.p-6.mb-8= JSON.stringify(webhook, null, 2)
+        //- li= webhook.value.data.repositories_added.length
+        li typeof = #{typeof webhook.value.data.repositories_added}
+        li repositories_added = #{JSON.stringify(webhook.value.data.repositories_added)}
+        if webhook.value.github.event === ''
+        li Repositories Added
+          ul
+            //- for repo in webhook.value.data.repositories_added
+              //- li (#{repo.id}) #{repo.full_name}
+          
+      pre.border.border-gray-600.p-6.mb-8= JSON.stringify(webhook.value.data, null, 2)
