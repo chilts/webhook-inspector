@@ -167,8 +167,10 @@ app.get('/webhooks', (req, res, next) => {
 
 app.post('/webhook/github', bodyParserRaw, checkGitHubSignature, githubSignatureError, (req, res) => {
   const id = yid()
+  const date = (new Date()).toISOString()
   db.put(`webhook:${id}`, {
     id,
+    date,
     github: {
       id: res.locals.id,
       event: res.locals.event,

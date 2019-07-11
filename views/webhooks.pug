@@ -7,17 +7,17 @@ block content
 
     for webhook in webhooks
       h3.font-bold Inspector ID = #{webhook.value.id}
-      ul
+      ul.pl-6.list-disc
         li GitHub ID = #{webhook.value.github.id}
         li GitHub Event = #{webhook.value.github.event}
         li Action = #{webhook.value.data.action}
         //- li= webhook.value.data.repositories_added.length
-        li typeof = #{typeof webhook.value.data.repositories_added}
-        li repositories_added = #{JSON.stringify(webhook.value.data.repositories_added)}
-        if webhook.value.github.event === ''
-        li Repositories Added
-          ul
-            //- for repo in webhook.value.data.repositories_added
-              //- li (#{repo.id}) #{repo.full_name}
-          
+        //- li typeof = #{typeof webhook.value.data.repositories_added}
+        //- li repositories_added = #{JSON.stringify(webhook.value.data.repositories_added)}
+        if webhook.value.data.repositories_added && webhook.value.data.repositories_added
+          li Repositories Added:
+            ul.pl-6.list-disc
+              for repo in webhook.value.data.repositories_added
+                li (#{repo.id}) #{repo.full_name}
+
       pre.border.border-gray-600.p-6.mb-8= JSON.stringify(webhook.value.data, null, 2)
