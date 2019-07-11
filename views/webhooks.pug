@@ -21,5 +21,23 @@ block content
                 li (#{repo.id}) #{repo.full_name}
         if webhook.value.github.event === "push"
           li Compare URL : #{webhook.value.data.compare}
+          li Commits:
+            ul.pl-6.list-disc
+              for commit in webhook.value.data.commits
+                li URL = #{commit.url}
+                li Added:
+                  ul.pl-6.list-disc
+                    for file in commit.added
+                      li= file
+                li Modified:
+                  ul.pl-6.list-disc
+                    for file in commit.modified
+                      li= file
+                li Removed:
+                  ul.pl-6.list-disc
+                    for file in commit.removed
+                      li= file
+                
+            
 
       pre.border.border-gray-600.p-6.mb-8= JSON.stringify(webhook.value, null, 2)
