@@ -118,8 +118,8 @@ app.get('/setup', (req, res) => {
 app.get('/installations', (req, res, next) => {
   const installations = []
   const opts = {
-    //gt: 'installation:',
-    //lt: 'installation::',
+    gt: 'installation:',
+    lt: 'installation::',
   }
   db.createReadStream(opts)
     .on('data', function (data) {
@@ -136,6 +136,31 @@ app.get('/installations', (req, res, next) => {
     .on('close', function () {
       // console.log('Stream closed')
       res.render('installations', { installations })
+    })
+  ;
+})
+
+app.get('/webhooks', (req, res, next) => {
+  const webhooks = []
+  const opts = {
+    gt: 'webhook:',
+    lt: 'webhook::',
+  }
+  db.createReadStream(opts)
+    .on('data', function (data) {
+      // console.log(data.key, '=', data.value)
+      webhooks.push(data)
+    })
+    .on('error', function (err) {
+      console.warn('err:', err)
+      next(err)
+    })
+    .on('end', function () {
+      // console.log('Stream ended')
+    })
+    .on('close', function () {
+      // console.log('Stream closed')
+      res.render('webhooks', { webhooks })
     })
   ;
 })

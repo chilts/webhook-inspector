@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  .w-full.px-4.text-gray-800.leading-normal(class="md:px-6")
+
+    h1.font-bold.font-sans.break-normal.text-gray-900.pt-6.pb-2.text-3xl(class="md:text-4xl") Installations
+
+    for webhook in webhooks
+      h3.font-bold Inspector ID = #{webhook.value.id}
+      ul
+        li GitHub ID = #{webhook.value.github.id}
+        li GitHub Event = #{webhook.value.github.event}
+        li Action = #{webhook.value.data.action}
+      pre.border.border-gray-600.p-6.mb-8= JSON.stringify(webhook, null, 2)
