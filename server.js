@@ -31,6 +31,9 @@ const bodyParserRaw = bodyParser.raw({ type: 'application/json' })
 
 function checkGitHubSignature(req, res, next) {
   console.log('headers:', req.headers)
+  console.log('headers1:', req.headers[githubDeliveryHeaderName])
+  console.log('headers2:', req.headers[githubEventHeaderName])
+  console.log('headers3:', req.headers[githubSignatureHeaderName])
   // console.log('typeof body:', typeof req.body)
   // console.log('body:', req.body.toString('utf8'))
   // console.log('body:', req.body)
