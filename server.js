@@ -23,13 +23,13 @@ const db = level('.data/store.db', { valueEncoding: 'json' })
 const bodyParserRaw = bodyParser.raw({ type: 'application/json' })
 
 function checkGitHubSignature(req, res, next) {
-  console.log('typeof body:', typeof req.body)
-  console.log('body:', req.body.toString('utf8'))
-  console.log('body:', req.body)
+  // console.log('typeof body:', typeof req.body)
+  // console.log('body:', req.body.toString('utf8'))
+  // console.log('body:', req.body)
 
   // check we have the required headers
   const id = req.headers[githubDeliveryHeaderName]
-  console.log('id:', id)
+  // console.log('id:', id)
   if (!id) {
     next(new Error('No X-Github-Delivery found on request'))
     return
@@ -37,7 +37,7 @@ function checkGitHubSignature(req, res, next) {
   res.local.id = id
 
   const event = req.headers[githubEventHeaderName]
-  console.log('event:', event)
+  // console.log('event:', event)
   if (!event) {
     next(new Error('No X-Github-Event found on request'))
     return
@@ -53,9 +53,9 @@ function checkGitHubSignature(req, res, next) {
 
   const hmac = crypto.createHmac('sha1', githubAppSecret)
   hmac.update(req.body)
-  const calculated = 'sha1=' + hmac.digest('hex')
-  // console.log("hmac(hex)=" + calculated)
-  if ( calculated !== signature ) {
+  const digest = hmac.digest('hex')
+  console.log("digest=" + digest)
+  if ( signature !== `sha1=${digest}` ) {
     next(new Error("GitHub Signature does not match what we calculated"))  
     return
   }
@@ -66,8 +66,8 @@ function checkGitHubSignature(req, res, next) {
   next()
 }
 
-function githubSignatureError(err, req, res, next) => {
-  res.status(403).send('Request body was not signed or verification failed')
+function githubSignatureError(err, req, res, next) {
+  res.status(403).send('GitHub WebHook: Request body was not signed by or verification failed.\n')
 }
 
 // app
@@ -127,7 +127,7 @@ app.get('/installations', (req, res, next) => {
   ;
 })
 
-app.post('/webhook/github', bodyParserRaw, checkGitHubSignature, (req, res) => {
+app.post('/webhook/github', bodyParserRaw, checkGitHubSignature, githubSignatureError, (req, res) => {
   const id = yid()
   db.put(`webhook:${id}`, {
     id,
