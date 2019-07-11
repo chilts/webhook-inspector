@@ -46,7 +46,7 @@ function checkGitHubSignature(req, res, next) {
     next(new Error('No X-Github-Delivery found on request'))
     return
   }
-  res.local.id = id
+  res.locals.id = id
 
   const event = req.headers[githubEventHeaderName]
   console.log('event:', event)
@@ -55,7 +55,7 @@ function checkGitHubSignature(req, res, next) {
     next(new Error('No X-Github-Event found on request'))
     return
   }
-  res.local.event = event
+  res.locals.event = event
 
   const signature = req.headers[githubSignatureHeaderName]
   console.log('signature:', signature)
