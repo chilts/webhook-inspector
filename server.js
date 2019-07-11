@@ -30,17 +30,17 @@ function addRequestId(req, res, next) {
 const bodyParserRaw = bodyParser.raw({ type: 'application/json' })
 
 function checkGitHubSignature(req, res, next) {
-  console.log('headers:', req.headers)
-  console.log('headers1:', req.headers[githubDeliveryHeaderName])
-  console.log('headers2:', req.headers[githubEventHeaderName])
-  console.log('headers3:', req.headers[githubSignatureHeaderName])
+  // console.log('headers:', req.headers)
+  // console.log('headers1:', req.headers[githubDeliveryHeaderName])
+  // console.log('headers2:', req.headers[githubEventHeaderName])
+  // console.log('headers3:', req.headers[githubSignatureHeaderName])
   // console.log('typeof body:', typeof req.body)
   // console.log('body:', req.body.toString('utf8'))
   // console.log('body:', req.body)
 
   // check we have the required headers
   const id = req.headers[githubDeliveryHeaderName]
-  console.log('id:', id)
+  // console.log('id:', id)
   if (!id) {
     console.warn('No X-Github-Delivery found on request')
     next(new Error('No X-Github-Delivery found on request'))
@@ -49,7 +49,7 @@ function checkGitHubSignature(req, res, next) {
   res.locals.id = id
 
   const event = req.headers[githubEventHeaderName]
-  console.log('event:', event)
+  // console.log('event:', event)
   if (!event) {
     console.warn('No X-Github-Event found on request')
     next(new Error('No X-Github-Event found on request'))
@@ -58,7 +58,7 @@ function checkGitHubSignature(req, res, next) {
   res.locals.event = event
 
   const signature = req.headers[githubSignatureHeaderName]
-  console.log('signature:', signature)
+  // console.log('signature:', signature)
   if (!signature) {
     next(new Error('No X-Hub-Signature found on request'))
     return
